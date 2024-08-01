@@ -38,7 +38,7 @@ int removeNode(LinkedList *ll, int index);
 
 int main()
 {
-	int c, i;
+	int c=1, i;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -103,6 +103,23 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	ListNode *cur = ll -> head;
+	ListNode *prev;
+	int size = ll -> size;
+	int i;
+	if (size % 2 == 1) {
+		size = (size / 2) + 1;
+	} else {
+		size = size / 2;
+	}
+	prev = cur;
+	for (i = 0; i < size - 1; i ++) {
+		cur = cur -> next;
+	}
+	resultFrontList -> head = prev;
+	resultBackList -> head = cur -> next;
+	cur -> next = NULL;
+	ll -> head = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

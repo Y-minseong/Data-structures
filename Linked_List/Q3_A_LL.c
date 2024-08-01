@@ -87,6 +87,85 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	// 내 가 짠 코 드 //////////////////////////////////////
+	// ListNode *cur, *tail, *prev;
+	// int i;
+	// int size = ll -> size;
+	// cur = ll -> head;
+	// while (cur != NULL) 
+	// {
+	// 	prev = cur;
+	// 	cur = cur -> next;
+	// 	tail = prev; 
+	// }
+	
+	// cur = (ListNode*)malloc(sizeof(ListNode));
+	// cur -> next = ll -> head;
+	// prev = NULL;
+
+	// for (i = 0; i < size + 1; i ++) {
+	// 	if (cur -> item % 2 == 1) {
+	// 		tail -> next = cur;
+	// 		tail = tail -> next;
+	// 		prev -> next = cur -> next;
+	// 		cur -> next = NULL;
+	// 		cur = prev -> next;
+
+	// 	} else {
+	// 		prev = cur;
+	// 		cur = cur -> next;
+	// 	}
+		
+	// }
+	// free(cur);
+	///////////////////////////////////////////
+	
+	if (ll -> head == NULL || ll -> head -> next == NULL) {
+		return;
+	}
+
+	ListNode *cur = ll -> head;
+	ListNode *prev = NULL;
+	ListNode *last = NULL;
+
+	last = ll -> head;
+	while (last -> next != NULL) {
+		last = last -> next;
+	}
+	ListNode *end = last;
+
+	while (cur != end) {
+		if (cur -> item % 2 == 1) {
+			if (cur == ll -> head) {
+				last -> next = cur;
+				ll -> head = cur -> next;
+				cur -> next = NULL;
+				cur = ll -> head;
+				last = last -> next;
+			} else {
+				last -> next = cur;
+				prev -> next = cur -> next;
+				cur -> next = NULL;
+				cur = prev -> next;
+				last = last -> next;
+
+			}
+		} else {
+			prev = cur;
+			cur = cur -> next;
+		}
+	}
+	if (end -> item % 2 == 1) {
+		if (end == ll -> head) {
+			ll -> head = end -> next;
+		} else {
+			prev -> next = end -> next;
+		}
+		last -> next = end;
+		end -> next = NULL;
+		last = end;
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
